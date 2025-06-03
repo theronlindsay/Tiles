@@ -1,49 +1,174 @@
-/* 🌿 Tile by Nehir – Starter CSS
-   This stylesheet adds simple styling to support your layout.
-   You'll enhance the layout further using Bootstrap during the LiveLab.
+/* 🌿 Tile by Nehir – Modern Enhanced CSS
+   This stylesheet adds modern hover effects and animations
+   to create an engaging, interactive tile gallery experience.
 */
 
-/* Set a soft textured background for the whole page */
+/* Set a soft textured background with modern gradient overlay */
 body {
-  background-image: url('../assets/offwhite-background.jpg');
+  background: linear-gradient(135deg, rgba(232, 217, 214, 0.9), rgba(244, 237, 235, 0.9)), 
+              url('../assets/offwhite-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: sans-serif;
-  padding: 16px; /* Adds space around edges on small screens */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 16px;
+  min-height: 100vh;
 }
 
-/* Header polish */
+/* Enhanced header with subtle animations */
 h1 {
-  padding: 8px;
-  border-radius: 4px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInDown 1s ease-out;
+  transition: transform 0.3s ease;
 }
 
-/* Limit image dimensions so tiles don’t overflow the layout */
-img {
-  max-height: 250px;
-  max-width: 250px;
+/* Add a gentle hover effect to the title */
+h1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Optional decorative border for each tile */
+/* Modern tile container with staggered animations */
+.tile-container {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Stagger the animation timing for each tile */
+.tile-container:nth-child(1) { animation-delay: 0.1s; }
+.tile-container:nth-child(2) { animation-delay: 0.2s; }
+.tile-container:nth-child(3) { animation-delay: 0.3s; }
+.tile-container:nth-child(4) { animation-delay: 0.4s; }
+
+/* Tile wrapper for positioning and magnetic effects */
+.tile-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Magnetic hover effect - main tile grows significantly */
+.tile-wrapper.tile-hovered {
+  transform: scale(1.15);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* Neighboring tiles get a subtle magnetic attraction effect */
+.tile-wrapper.tile-neighbor {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+}
+
+/* Modern tile images with smooth animations (no rotation) */
+.modern-tile {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 15px;
+  filter: brightness(0.95) contrast(1.05);
+}
+
+/* Enhanced image effects for hovered tile */
+.tile-wrapper.tile-hovered .modern-tile {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+}
+
+/* Subtle enhancement for neighboring tile images */
+.tile-wrapper.tile-neighbor .modern-tile {
+  filter: brightness(1.02) contrast(1.02) saturate(1.05);
+}
+
+/* Enhanced border styling */
 .border-tile {
-  border: 20px solid transparent;
-  border-image: url('../assets/wood.jpg') 30 round;
-  padding: 5px;
-  background-color: white;
+  border: 15px solid transparent;
+  border-image: linear-gradient(45deg, #e8d9d6, #f4eded, #d4c4c1) 1;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 
-/* Optional caption style if you add labels under your tiles */
+/* Responsive image sizing with modern constraints */
+img {
+  max-height: 280px;
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
+
+/* Modern caption styling */
 .tile-caption {
   text-align: center;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #444;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #5a4a42;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
 }
 
-/* 💡 Optional Enhancements:
-   - Try adding a hover effect with transform and box-shadow
-   - Use border-radius for rounded image corners
-   - Combine with Bootstrap utilities like p-3, mb-4, text-center
-   - Ask AI: “Add a subtle zoom effect on image hover”
-*/
+.tile-container:hover .tile-caption {
+  opacity: 1;
+}
+
+/* Keyframe animations for modern effects */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add a subtle floating animation for extra personality */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Modern responsive adjustments */
+@media (max-width: 768px) {
+  img {
+    height: 200px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    padding: 15px;
+  }
+  
+  /* Reduce magnetic effect on smaller screens for better touch interaction */
+  .tile-wrapper.tile-hovered {
+    transform: scale(1.1);
+  }
+  
+  .tile-wrapper.tile-neighbor {
+    transform: scale(1.03);
+  }
+}
