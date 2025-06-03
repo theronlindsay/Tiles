@@ -1,35 +1,123 @@
-/* 🌿 Tile by Nehir – Modern Enhanced CSS
-   This stylesheet adds modern hover effects and animations
+/* 🌿 Tile by Nehir – Modern Enhanced CSS with Parallax Effects
+   This stylesheet adds modern hover effects, animations, and parallax
    to create an engaging, interactive tile gallery experience.
 */
 
-/* Set a soft textured background with modern gradient overlay */
+/* Parallax Background Container */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Parallax Layers with Different Speeds */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 120%;
+  background-repeat: repeat;
+  animation: parallaxFloat 20s ease-in-out infinite;
+}
+
+/* Layer 1 - Slowest moving, cool hexagonal pattern */
+.layer-1 {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(45, 55, 72, 0.4) 3px, transparent 3px),
+    radial-gradient(circle at 75% 75%, rgba(74, 85, 104, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(26, 32, 44, 0.2) 1px, transparent 1px);
+  background-size: 80px 80px, 60px 60px, 40px 40px;
+  animation-duration: 30s;
+  transform: translateZ(0) scale(1.1);
+}
+
+/* Layer 2 - Medium speed, cool diamond grid */
+.layer-2 {
+  background-image: 
+    linear-gradient(45deg, rgba(45, 55, 72, 0.15) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(74, 85, 104, 0.12) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(26, 32, 44, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(45, 55, 72, 0.08) 75%);
+  background-size: 50px 50px;
+  background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+  animation-duration: 22s;
+  animation-delay: -4s;
+  transform: translateZ(0) scale(1.05);
+}
+
+/* Layer 3 - Fastest, cool circuit-board pattern */
+.layer-3 {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      rgba(74, 85, 104, 0.08) 0px,
+      rgba(74, 85, 104, 0.08) 2px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(45, 55, 72, 0.06) 0px,
+      rgba(45, 55, 72, 0.06) 1px,
+      transparent 1px,
+      transparent 90px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(26, 32, 44, 0.04) 0px,
+      rgba(26, 32, 44, 0.04) 1px,
+      transparent 1px,
+      transparent 120px
+    );
+  animation-duration: 18s;
+  animation-delay: -7s;
+}
+
+/* Content overlay with enhanced backdrop for darker theme */
+.content-overlay {
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem !important;
+}
+
+/* Set a sophisticated dark background with cool tones */
 body {
-  background: linear-gradient(135deg, rgba(232, 217, 214, 0.9), rgba(244, 237, 235, 0.9)), 
-              url('../assets/offwhite-background.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, rgba(26, 32, 44, 0.95), rgba(45, 55, 72, 0.92), rgba(74, 85, 104, 0.88));
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 16px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Enhanced header with subtle animations */
+/* Enhanced header with dark theme styling */
 h1 {
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: fadeInDown 1s ease-out;
-  transition: transform 0.3s ease;
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  animation: fadeInDown 1.2s ease-out;
+  transition: all 0.4s ease;
+  background: rgba(232, 217, 214, 0.9);
+  position: relative;
+  z-index: 2;
+  color: #2d3748;
 }
 
 /* Add a gentle hover effect to the title */
 h1:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  background: rgba(232, 217, 214, 0.95);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Modern tile container with staggered animations */
@@ -44,55 +132,64 @@ h1:hover {
 .tile-container:nth-child(3) { animation-delay: 0.3s; }
 .tile-container:nth-child(4) { animation-delay: 0.4s; }
 
-/* Tile wrapper for positioning and magnetic effects */
+/* Tile wrapper for positioning and magnetic effects with dark theme */
 .tile-wrapper {
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 25px;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Magnetic hover effect - main tile grows significantly */
+/* Magnetic hover effect - main tile grows significantly (Level 2) */
 .tile-wrapper.tile-hovered {
-  transform: scale(1.15);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+  transform: scale(1.15) translateZ(10px);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+  z-index: 15;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Neighboring tiles get a subtle magnetic attraction effect */
+/* Direct neighboring tiles get subtle magnetic attraction (Level 1) */
 .tile-wrapper.tile-neighbor {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  z-index: 5;
+  transform: scale(1.05) translateZ(5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Modern tile images with smooth animations (no rotation) */
+/* Modern tile images with smooth animations and parallax compatibility */
 .modern-tile {
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 15px;
-  filter: brightness(0.95) contrast(1.05);
+  border-radius: 20px;
+  filter: brightness(0.95) contrast(1.05) saturate(1.1);
 }
 
 /* Enhanced image effects for hovered tile */
 .tile-wrapper.tile-hovered .modern-tile {
   transform: scale(1.05);
-  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+  filter: brightness(1.15) contrast(1.15) saturate(1.3);
 }
 
 /* Subtle enhancement for neighboring tile images */
 .tile-wrapper.tile-neighbor .modern-tile {
-  filter: brightness(1.02) contrast(1.02) saturate(1.05);
+  filter: brightness(1.05) contrast(1.05) saturate(1.15);
 }
 
-/* Enhanced border styling */
+/* Enhanced border styling with dark theme */
 .border-tile {
-  border: 15px solid transparent;
-  border-image: linear-gradient(45deg, #e8d9d6, #f4eded, #d4c4c1) 1;
+  border: 12px solid transparent;
+  border-image: linear-gradient(45deg, rgba(232, 217, 214, 0.6), rgba(244, 237, 235, 0.7), rgba(212, 196, 193, 0.5)) 1;
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 /* Responsive image sizing with modern constraints */
@@ -142,6 +239,22 @@ img {
   }
 }
 
+/* Parallax floating animation for depth layers */
+@keyframes parallaxFloat {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) scale(1.1);
+  }
+  25% {
+    transform: translateX(-10px) translateY(-5px) scale(1.1);
+  }
+  50% {
+    transform: translateX(0px) translateY(-10px) scale(1.1);
+  }
+  75% {
+    transform: translateX(10px) translateY(-5px) scale(1.1);
+  }
+}
+
 /* Add a subtle floating animation for extra personality */
 @keyframes float {
   0%, 100% {
@@ -152,7 +265,7 @@ img {
   }
 }
 
-/* Modern responsive adjustments */
+/* Modern responsive adjustments with parallax considerations */
 @media (max-width: 768px) {
   img {
     height: 200px;
@@ -160,7 +273,7 @@ img {
   
   h1 {
     font-size: 1.8rem;
-    padding: 15px;
+    padding: 20px;
   }
   
   /* Reduce magnetic effect on smaller screens for better touch interaction */
@@ -170,5 +283,14 @@ img {
   
   .tile-wrapper.tile-neighbor {
     transform: scale(1.03);
+  }
+  
+  /* Reduce parallax intensity on mobile for better performance */
+  .parallax-layer {
+    animation-duration: 30s;
+  }
+  
+  .content-overlay {
+    padding: 1rem !important;
   }
 }
